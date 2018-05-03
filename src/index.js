@@ -58,6 +58,7 @@ const APIMethods = {
   },
   videos: {
     part: [
+      ...defaultPart,
       'contentDetails',
       'liveStreamingDetails',
       'localizations',
