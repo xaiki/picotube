@@ -5,7 +5,7 @@ const REQUIRED = '__YT_IS_REQUIRED__'
 
 const APIMethods = {
   activities: {
-    part: [...defaultPart, 'contentDetails']
+    part: [...defaultPart, 'contentDetails'],
   },
   captions: {
     part: [...defaultPart],
@@ -14,9 +14,6 @@ const APIMethods = {
   channels: {
     part: [
       ...defaultPart,
-      'auditDetails',
-      'brandingSettings',
-      'contentOwnerDetails',
       'localizations',
       'statistics',
       'status',
@@ -24,13 +21,13 @@ const APIMethods = {
     ]
   },
   channelSections: {
-    part: [...defaultPart, 'localizations', 'targeting']
+    part: [...defaultPart, 'localizations']
   },
   comments: {
     part: [...defaultPart]
   },
   commentThreads: {
-    part: [...defaultPart, 'replies']
+    part: [...defaultPart]
   },
   guideCategories: {
     part: ['snippet']
@@ -48,36 +45,36 @@ const APIMethods = {
     part: [...defaultPart, 'contentDetails', 'localizations', 'player', 'status']
   },
   search: {
-    part: REQUIRED
+    part: ['snippet']
   },
   subscriptions: {
-    part: [...defaultPart, 'contentDetails', 'subscriberSnippet']
+    part: [...defaultPart, 'contentDetails']
   },
   videoAbuseReportReasons: {
-    part: REQUIRED
+    part: ['snippet']
   },
   videoCategories: {
     part: ['snippet']
-  }
+  },
   videos: {
     part: [
       'contentDetails',
-      'fileDetails',
       'liveStreamingDetails',
       'localizations',
       'player',
-      'processingDetails',
       'recordingDetails',
       'statistics',
       'status',
-      'suggestions',
-      'topicDetails',
+      'topicDetails'
     ]
   }
 }
 
 class PicoTube {
   constructor (key) {
+    if (!key) {
+      throw(new Error('need an API key'))
+    }
     this.key = key
 
     Object.keys(APIMethods).map(method => {
@@ -89,7 +86,7 @@ class PicoTube {
           key: this.key
         }, args)
 
-        parms.part = params.part.join(',')
+        params.part = params.part.join(',')
 
         return axios.get('https://www.googleapis.com/youtube/v3/videos', {
           params
@@ -99,4 +96,7 @@ class PicoTube {
   }
 }
 
-module.exports = PicoTube
+export {
+  PicoTube as default,
+  APIMethods
+}

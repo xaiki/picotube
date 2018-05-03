@@ -2,15 +2,31 @@
   "name": "picotube",
   "version": "0.0.1",
   "description": "Minimal library to get data from youtube",
-  "main": "index.js",
+  "main": "lib",
   "repository": "https://github.com/xaiki/picotube",
   "author": "Niv Sardi <x@btn.sh>",
   "license": "GPLv3.0",
   "private": false,
+  "scripts": {
+    "start": "npm run test:watch",
+    "test": "mocha",
+    "test:watch": "npm run test -- --watch",
+    "test:coverage": "nyc --reporter=lcov npm test -- --reporter dot && nyc report",
+    "lint": "standard src/ test/",
+    "compile": "rimraf lib/*; babel src/ -d lib/ -s",
+    "compile:watch": "npm run compile -- -w",
+    "prepublish": "npm run compile"
+  },
   "dependencies": {
     "axios": "^0.18.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "expect": "^22.4.3",
+    "mocha": "^5.1.1",
+    "nyc": "^11.7.1",
+    "rimraf": "^2.6.2",
     "standard": "^11.0.1"
   }
 }
