@@ -6,6 +6,7 @@ const REQUIRED = '__YT_IS_REQUIRED__'
 const APIMethods = {
   activities: {
     part: [...defaultPart, 'contentDetails'],
+    channelId: REQUIRED
   },
   captions: {
     part: [...defaultPart],
@@ -80,16 +81,18 @@ class PicoTube {
 
     Object.keys(APIMethods).map(method => {
       this[method] = (args) => {
-        const {part} = APIMethods[method]
+        const {part, ...defaults} = APIMethods[method]
 
         let params = Object.assign({}, {
           part: part,
           key: this.key
-        }, args)
+        }, defaults, args)
 
         params.part = params.part.join(',')
 
-        return axios.get('https://www.googleapis.com/youtube/v3/videos', {
+        console.error('params', method, params)
+
+        return axios.get(`https://www.googleapis.com/youtube/v3/${method}`, {
           params
         })
       }
