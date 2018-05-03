@@ -1,0 +1,16 @@
+{
+  "name": "picotube",
+  "version": "0.0.1",
+  "description": "Minimal library to get data from youtube",
+  "main": "index.js",
+  "repository": "https://github.com/xaiki/picotube",
+  "author": "Niv Sardi <x@btn.sh>",
+  "license": "GPLv3.0",
+  "private": false,
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "standard": "^11.0.1"
+  }
+}
