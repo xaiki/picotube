@@ -1,6 +1,6 @@
 {
   "name": "picotube",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Minimal library to get data from youtube",
   "main": "lib",
   "repository": "https://github.com/xaiki/picotube",
